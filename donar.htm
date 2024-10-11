@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+		<h1 class="text-2xl font-bold text-center mb-6">@Destro</h1>
+		<h2 class="text-lg font-semibold mb-2">Treat me to a coffee</h2>
+        <div class="space-y-4">
+		
+            <div id="paypal-option" class="p-4 border rounded-lg">
+                <a href="https://www.paypal.com/donate/?hosted_button_id=VXDVLJH94XML6" target="_blank" class="block">
+                    <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors w-full">
+                        PayPal
+                    </button>
+                </a>
+            </div>
+			
+			<div id="paypal-option" class="p-4 border rounded-lg">
+                <a href="https://buymeacoffee.com/destro94" target="_blank" class="block">
+                    <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors w-full">
+                        Buy Me a Coffee
+                    </button>
+                </a>
+            </div>
+			
+            <div id="mercadopago-option" class="p-4 border rounded-lg">
+                <button onclick="toggleMercadoPagoDetails()" class="bg-blue-400 text-white px-6 py-2 rounded hover:bg-blue-500 transition-colors w-full">
+                    MercadoPago (ARG)
+                </button>
+                <div id="mercadopago-details" class="hidden mt-4 p-4 bg-gray-50 rounded-lg">
+                    <p class="font-semibold mb-2">CVU:</p>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" value="0000003100078245516194" readonly class="bg-white p-2 rounded border flex-grow" id="cvuNumber">
+                        <button onclick="copyCVU()" class="bg-gray-200 px-3 py-2 rounded hover:bg-gray-300 transition-colors">
+                            Copy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transition-opacity duration-300 opacity-0 pointer-events-none">
+        CVU copied to clipboard!
+    </div>
+
+    <script>
+        function toggleMercadoPagoDetails() {
+            const details = document.getElementById('mercadopago-details');
+            details.classList.toggle('hidden');
+        }
+        function copyCVU() {
+            const cvuNumber = document.getElementById('cvuNumber');
+            cvuNumber.select();
+            document.execCommand('copy');
+            
+            // Show toast notification
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+            
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
